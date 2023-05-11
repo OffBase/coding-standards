@@ -26,6 +26,7 @@
 
 		<!-- We like short arrays and ternaries around here -->
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax" />
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found" />
 
 		<!--
 		OK, real talk right now. Yoda conditions are ridiculous.
