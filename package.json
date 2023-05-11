@@ -1,9 +1,9 @@
 {
-	"name": "@humanmade/coding-standards",
+	"name": "@offbase/coding-standards",
 	"version": "1.1.0",
 	"private": true,
-	"description": "Human Made Coding Standards.",
-	"author": "Human Made",
+	"description": "Off Base Coding Standards.",
+	"author": "Off Base",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"scripts",
@@ -12,15 +12,15 @@
 		"npm-package-json-lint",
 		"lint",
 		"linter",
-		"humanmade"
+		"offbase"
 	],
-	"homepage": "https://github.com/humanmade/coding-standards",
+	"homepage": "https://github.com/offbase/coding-standards",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/humanmade/coding-standards.git"
+		"url": "git+https://github.com/offbase/coding-standards.git"
 	},
 	"bugs": {
-		"url": "https://github.com/humanmade/coding-standards/issues"
+		"url": "https://github.com/offbase/coding-standards/issues"
 	},
 	"engines" : {
 		"npm" : ">=7.0.0",

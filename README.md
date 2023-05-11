@@ -1,19 +1,17 @@
 <table width="100%">
 	<tr>
 		<td align="left" width="70%">
-			<strong>Human Made Coding Standards</strong><br />
+			<strong>Off Base Coding Standards</strong><br />
 			WordPress coding standards, enhanced for modern development.
 		</td>
 		<td align="center" width="30%">
-			<a href="https://packagist.org/packages/humanmade/coding-standards"><img src="https://img.shields.io/packagist/v/humanmade/coding-standards.svg" /></a>
 			<a href="https://www.npmjs.com/package/@humanmade/eslint-config"><img src="https://img.shields.io/npm/v/@humanmade/eslint-config?label=%40humanmade%2Feslint-config" /></a>
 			<a href="https://www.npmjs.com/package/@humanmade/stylelint-config"><img src="https://img.shields.io/npm/v/@humanmade/stylelint-config?label=%40humanmade%2Fstylelint-config" /></a>
-			<img src="https://travis-ci.com/humanmade/coding-standards.svg?branch=master" alt="Build Status" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			A <strong><a href="https://hmn.md/">Human Made</a></strong> project.
+			Based on the <a href="https://github.com/humanmade/coding-standards">Human Made coding standards</a>.
 		</td>
 		<td align="center" width="30%">
 			<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" />
@@ -31,7 +29,7 @@ We welcome contributions to these standards and want to make the experience as s
 
 Each ruleset is available individually via Composer or NPM. To install the needed ruleset, use one of the following commands:
 
- - PHPCS: `composer require --dev humanmade/coding-standards`
+ - PHPCS: `composer require --dev offbase/coding-standards`
  - ESLint: `npx install-peerdeps --dev @humanmade/eslint-config@latest`
  - stylelint: `npm install --save-dev stylelint @humanmade/stylelint-config`
 
@@ -40,7 +38,7 @@ Each ruleset is available individually via Composer or NPM. To install the neede
 Run the following command to run the standards checks:
 
 ```
-vendor/bin/phpcs --standard=vendor/humanmade/coding-standards .
+vendor/bin/phpcs --standard=vendor/offbase/coding-standards .
 ```
 
 We use the [DealerDirect phpcodesniffer-composer-installer](https://github.com/Dealerdirect/phpcodesniffer-composer-installer) package to handle `installed_paths` for PHPCS when first installing the HM ruleset. If you an error such as `ERROR: Referenced sniff "WordPress-Core" does not exist`, delete the `composer.lock` file and `vendor` directories and re-install Composer dependencies.   
@@ -52,7 +50,7 @@ You can add this to your Travis YAML file as a test:
 ```yaml
 script:
   - phpunit
-  - vendor/bin/phpcs --standard=vendor/humanmade/coding-standards .
+  - vendor/bin/phpcs --standard=vendor/offbase/coding-standards .
 ```
 
 ### Excluding Files
@@ -91,7 +89,7 @@ If you want to add further rules (such as WordPress.com VIP-specific rules) or c
 	<config name="testVersion" value="7.2-" />
 
 	<!-- Use HM Coding Standards -->
-	<rule ref="vendor/humanmade/coding-standards" />
+	<rule ref="vendor/offbase/coding-standards" />
 
 	<!-- Add VIP-specific rules -->
 	<rule ref="WordPress-VIP" />
@@ -110,7 +108,7 @@ vendor/bin/phpcs --standard=phpcs.ruleset.xml .
 You can also customise the rule to exclude elements if they aren't applicable to the project:
 
 ```xml
-<rule ref="vendor/humanmade/coding-standards">
+<rule ref="vendor/offbase/coding-standards">
 	<!-- Disable short array syntax -->
 	<exclude name="HM.Debug.ForceShortArray" />
 </rule>

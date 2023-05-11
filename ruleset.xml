@@ -3,6 +3,6 @@
 
 	<description>Proxy to the actual Human Made coding standards.</description>
 
-	<rule ref="vendor/humanmade/coding-standards/HM/ruleset.xml" />
+	<rule ref="vendor/offbase/coding-standards/HM/ruleset.xml" />
 
 </ruleset>
