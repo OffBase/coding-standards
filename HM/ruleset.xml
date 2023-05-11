@@ -26,7 +26,6 @@
 
 		<!-- We like short arrays and ternaries around here -->
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax" />
-		<exclude name="WordPress.PHP.DisallowShortTernary" />
 
 		<!--
 		OK, real talk right now. Yoda conditions are ridiculous.
