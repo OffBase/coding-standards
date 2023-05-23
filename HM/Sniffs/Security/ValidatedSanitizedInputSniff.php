@@ -4,6 +4,7 @@ namespace HM\Sniffs\Security;
 
 use HM\Sniffs\ExtraSniffCode;
 use PHP_CodeSniffer\Files\File as PhpcsFile;
+use PHPCSUtils\Utils\TextStrings;
 use WordPressCS\WordPress\Helpers\VariableHelper;
 use WordPressCS\WordPress\Sniffs\Security\ValidatedSanitizedInputSniff as WPCSValidatedSanitizedInputSniff;
 
@@ -95,7 +96,7 @@ class ValidatedSanitizedInputSniff extends WPCSValidatedSanitizedInputSniff {
 		}
 
 		// Constant string, check if it's allowed.
-		$key = $this->strip_quotes( $this->tokens[ $index_token ]['content'] );
+		$key = TextStrings::stripQuotes( $this->tokens[ $index_token ]['content'] );
 		if ( ! in_array( $key, $this->allowedServerKeys, true ) ) {
 			// Unsafe key, requires sanitising.
 			return false;

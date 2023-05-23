@@ -4,6 +4,7 @@ namespace HM\Sniffs\Performance;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
+use PHPCSUtils\Utils\TextStrings;
 use WordPressCS\WordPress\AbstractArrayAssignmentRestrictionsSniff;
 
 /**
@@ -138,7 +139,7 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 
 		foreach ( $elements as $element ) {
 			if ( isset( $element['index_start'] ) ) {
-				$index = $this->strip_quotes( $this->tokens[ $element['index_start'] ]['content'] );
+				$index = TextStrings::stripQuotes( $this->tokens[ $element['index_start'] ]['content'] );
 				if ( strtolower( $index ) === 'relation' ) {
 					// Skip 'relation' element.
 					continue;
@@ -176,7 +177,7 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 			return static::DYNAMIC_VALUE;
 		}
 
-		return $this->strip_quotes( $this->tokens[ $value_start ]['content'] );
+		return TextStrings::stripQuotes( $this->tokens[ $value_start ]['content'] );
 	}
 
 	/**
@@ -208,7 +209,7 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 				continue;
 			}
 
-			$index = $this->strip_quotes( $this->tokens[ $start ]['content'] );
+			$index = TextStrings::stripQuotes( $this->tokens[ $start ]['content'] );
 			if ( $index !== $array_key ) {
 				// Not the item we want, skip.
 				continue;
