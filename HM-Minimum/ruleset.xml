@@ -79,6 +79,12 @@
 		<type>error</type>
 	</rule>
 
+	<!-- Allows to turn off checking for translators comments for text strings containing placeholders.-->
+	<rule ref="WordPress">
+		<exclude name="WordPress.WP.I18n.TranslatorsCommentWrongStyle"/>
+		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	</rule>
+
 	<!-- Disallow functions where WordPress has an alternative. -->
 	<rule ref="WordPress.WP.AlternativeFunctions">
 		<!-- ...but, allow some back in. -->
@@ -155,10 +161,6 @@
 
 	<!-- Require correct usage of WP's i18n functions. -->
 	<rule ref="WordPress.WP.I18n">
-		<properties>
-			<property name="check_translator_comments" value="false" />
-		</properties>
-
 		<!-- Allow empty strings to be translated (e.g. space character) -->
 		<exclude name="WordPress.WP.I18n.NoEmptyStrings" />
 
