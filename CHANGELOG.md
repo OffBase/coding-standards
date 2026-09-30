@@ -1,5 +1,57 @@
 # Changelog
 
+<!-- When submitting a PR for a feature, add the appropriate prerelease heading here
+and fill in the contents as you go. This simplifies later release management. -->
+
+## 2.5.0
+
+- Add `HM.Files.PatternSlugMatchesFilename` sniff verifying that a theme pattern file's `Slug:` header matches its filename
+
+## 2.4.0
+
+- Add `HM.Functions.RegisterBlockTypePath` sniff recommending `register_block_type_from_metadata()` when a file path is passed to `register_block_type()`
+
+## 2.3.0
+
+- Do not lint PHP within `build/` and `dist/` build directories
+
+## 2.2.1
+
+- Do not flag get_block_wrapper_attributes as an escaping risk, this is a false positive as function escapes internally #340
+- Stop adding dates to changelog entries, they can be seen at https://github.com/humanmade/coding-standards/releases and they complicate release timing
+
+## 2.2.0 (June 22, 2026)
+
+- Adds official support for single-file must-use plugins when appropriate by relaxing side-effect and file name restrictions on direct children of mu-plugins/ and client-mu-plugins/ #337
+
+## 2.1.0 (June 11, 2026)
+
+- Support WPCS and VIPCS versions above 3.0.x (_e.g._ 3.1, 3.2, 3.3) #335
+
+## 2.0.2 (May 22, 2026)
+
+- Fix issue #319 where strict_types was misinterpreted as a namespace #333
+- Fix PHP 8.4 deprecation warning on a nullable argument within `SlowMetaQuerySniff` #326
+- Update docs with new GitHub organization for PHPCS #325
+
+## 2.0.1 (April 30, 2026)
+
+- Set PHP 8.2 as minimum testVersion in PHPCompatibility to fix exception in 2.0.0
+
+## 2.0.0 (April 30, 2026)
+
+### Breaking Changes:
+
+- Updated WPCS to 3.0.0 and VIPCS to 3.0.0
+- Raised the minimum supported PHP version to 8.2
+- Raised the PHPUnit development dependency to 8.2
+- Updated `HM.Security.EscapeOutput` for WPCS 3.x: exception messages are no longer treated as an output boundary in `HM-Minimum`, while error-reporting function message arguments must still be escaped
+
+### Removed:
+
+- Removed the deprecated `Generic.Functions.CallTimePassByReference` sniff
+- Removed references to WPCS internals that no longer exist in WPCS 3.x
+
 ## 1.2.0 (September 13, 2022)
 
 - Add new Isset sniff #236
