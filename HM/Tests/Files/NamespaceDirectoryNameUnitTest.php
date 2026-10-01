@@ -51,6 +51,10 @@ class NamespaceDirectoryNameUnitTest extends AbstractSniffUnitTest {
 			'namespace.php',
 			'camelcased-namespace.php',
 			'underscored-namespace.php',
+			'strict-types-namespace.php',
+			// Single-file mu-plugins are exempt from the directory structure rules.
+			'mu-plugin.php',
+			'client-mu-plugin.php',
 		];
 		if ( in_array( $file, $pass, true ) ) {
 			return [];

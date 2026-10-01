@@ -85,7 +85,13 @@ class FixtureTests extends TestCase {
 	/**
 	 * Setup our ruleset.
 	 */
-	public function setUp() {
+	public function setUp(): void {
+		// AllSniffs uses ConfigDouble which sets Config::$configData = [] to prevent
+		// reading CodeSniffer.conf. Reset it so Ruleset can resolve installed standards.
+		$configDataProp = new \ReflectionProperty( Config::class, 'configData' );
+		$configDataProp->setAccessible( true );
+		$configDataProp->setValue( null, null );
+
 		$this->config            = new Config();
 		$this->config->cache     = false;
 		$this->config->standards = [ 'HM' ];
@@ -115,12 +121,22 @@ class FixtureTests extends TestCase {
 
 		$this->ruleset = new Ruleset( $this->config );
 
+		// ExceptionNotEscaped is excluded in HM-Minimum ruleset.xml, but IN_TESTS mode
+		// with sniff restrictions skips processRuleset(), so apply the exclusion manually.
+		$this->ruleset->ruleset['HM.Security.EscapeOutput.ExceptionNotEscaped'] = [ 'severity' => 0 ];
+
 		// Set configuration as needed too.
 		$this->ruleset->setSniffProperty( 'HM\\Sniffs\\Security\\EscapeOutputSniff', 'customAutoEscapedFunctions', [
-			'my_custom_func',
-			'another_func',
+			'scope' => 'sniff',
+			'value' => [
+				'my_custom_func',
+				'another_func',
+			]
 		] );
-		$this->ruleset->setSniffProperty( 'HM\\Sniffs\\Security\\NonceVerificationSniff', 'allowQueryVariables', true );
+		$this->ruleset->setSniffProperty( 'HM\\Sniffs\\Security\\NonceVerificationSniff', 'allowQueryVariables', [
+			'scope' => 'sniff',
+			'value' => true
+		] );
 	}
 
 	/**

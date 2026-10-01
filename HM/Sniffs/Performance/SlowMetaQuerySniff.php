@@ -4,6 +4,8 @@ namespace HM\Sniffs\Performance;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
+use PHPCSUtils\Utils\Arrays;
+use PHPCSUtils\Utils\MessageHelper;
 use PHPCSUtils\Utils\TextStrings;
 use WordPressCS\WordPress\AbstractArrayAssignmentRestrictionsSniff;
 
@@ -105,7 +107,8 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 		$array_open_token = $this->tokens[ $array_open ];
 		if ( $array_open_token['code'] !== T_ARRAY && $array_open_token['code'] !== T_OPEN_SHORT_ARRAY ) {
 			// Dynamic value, we can't check.
-			$this->addMessage(
+			MessageHelper::addMessage(
+				$this->phpcsFile,
 				'meta_query is dynamic, cannot be checked.',
 				$array_open,
 				'warning',
@@ -115,7 +118,7 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 			return;
 		}
 
-		$array_bounds = $this->find_array_open_close( $array_open );
+		$array_bounds = Arrays::getOpenClose( $this->phpcsFile, $array_open );
 		$elements = $this->get_array_indices( $array_bounds['opener'], $array_bounds['closer'] );
 
 		// Is this a "first-order" query?
@@ -265,13 +268,14 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 	 *
 	 * @param string $compare Comparison value
 	 */
-	protected function check_compare_value( string $compare, int $stackPtr = null ) : void {
+	protected function check_compare_value( string $compare, ?int $stackPtr = null ) : void {
 		if ( empty( $stackPtr ) ) {
 			$stackPtr = $this->stackPtr;
 		}
 
 		if ( $compare === static::DYNAMIC_VALUE ) {
-			$this->addMessage(
+			MessageHelper::addMessage(
+				$this->phpcsFile,
 				'meta_query is using a dynamic comparison; this cannot be checked automatically, and may be non-performant.',
 				$stackPtr,
 				'warning',
@@ -279,7 +283,8 @@ class SlowMetaQuerySniff extends AbstractArrayAssignmentRestrictionsSniff {
 			);
 		} elseif ( $compare !== 'EXISTS' && $compare !== 'NOT EXISTS' ) {
 			// Add a message ourselves.
-			$this->addMessage(
+			MessageHelper::addMessage(
+				$this->phpcsFile,
 				'meta_query is using %s comparison, which is non-performant.',
 				$stackPtr,
 				'warning',
